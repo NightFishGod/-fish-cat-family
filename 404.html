@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>猫咪走丢啦 - 404</title>
+    <style>
+        body {
+            font-family: 'Arial Rounded MT Bold', 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ffe6f2 0%, #e6f7ff 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .cat-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+        }
+        .cat-404 {
+            font-size: 120px;
+            margin: 0;
+            line-height: 1;
+        }
+        h1 {
+            color: #ff6b9d;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+        .button {
+            display: inline-block;
+            background: #ff6b9d;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: bold;
+            transition: all 0.3s;
+            margin: 10px;
+            box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+        }
+        .button:hover {
+            background: #ff4d8d;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(255, 107, 157, 0.4);
+        }
+        .tips {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 40px;
+            max-width: 600px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+        }
+        .tips h3 {
+            color: #4a90e2;
+            margin-top: 0;
+        }
+        .emoji-list {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            font-size: 2rem;
+        }
+        .footer {
+            margin-top: 50px;
+            color: #999;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cat-container">
+        <div class="cat-404">😿</div>
+    </div>
+    
+    <h1>猫咪走丢啦！</h1>
+    <p>你想看的页面被猫咪们叼走了，它们可能正在追蝴蝶或者打盹儿...</p>
+    
+    <div class="emoji-list">
+        <span>🐱</span>
+        <span>😺</span>
+        <span>😸</span>
+        <span>😹</span>
+        <span>😻</span>
+    </div>
+    
+    <a href="/" class="button">返回猫咪族谱主页</a>
+    
+    <div class="tips">
+        <h3>常见原因</h3>
+        <ul style="text-align: left; line-height: 1.8;">
+            <li>🚀 <strong>刚刚部署</strong>：GitHub Pages 需要 1-3 分钟生效</li>
+            <li>🔗 <strong>链接变化</strong>：请检查网址是否正确</li>
+            <li>🐾 <strong>猫咪调皮</strong>：它们可能把页面藏起来了</li>
+            <li>📱 <strong>缓存问题</strong>：尝试清除浏览器缓存</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        <p>猫咪族谱 | 2026 | 找不到页面时显示此页面</p>
+    </div>
+    
+    <script>
+        // 随机显示不同的猫 emoji
+        const catEmojis = ['😿', '😾', '🙀', '😽', '😼'];
+        document.querySelector('.cat-404').textContent = 
+            catEmojis[Math.floor(Math.random() * catEmojis.length)];
+            
+        // 添加一些动画
+        document.querySelector('.button').addEventListener('mouseover', function() {
+            document.querySelector('.cat-404').style.transform = 'scale(1.1)';
+        });
+        
+        document.querySelector('.button').addEventListener('mouseout', function() {
+            document.querySelector('.cat-404').style.transform = 'scale(1)';
+        });
+    </script>
+</body>
+</html>
