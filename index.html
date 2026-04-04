@@ -46,17 +46,6 @@ body {
 
 .status-icons { display: flex; gap: 8px; align-items: center; font-size: 13px; }
 
-/* ===== 导航栏 ===== */
-.nav-bar {
-  background: #FFF5E6;
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: 700;
-  color: #3A1A00;
-  border-bottom: 1px solid rgba(160, 100, 30, 0.1);
-}
-
 /* ===== 内容区 ===== */
 .content {
   padding: 16px;
@@ -398,48 +387,9 @@ body {
 
 .photo-cell:active { transform: scale(0.95); }
 
-/* ===== 底部操作栏 ===== */
-.bottom-bar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: rgba(255, 245, 230, 0.9);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(160, 100, 30, 0.2);
-  padding: 12px 16px;
-  display: flex;
-  justify-content: space-between;
-  z-index: 500;
-  max-width: 450px;
-  left: 50%;
-  transform: translateX(-50%);
-}
 
-.bottom-btn {
-  background: #E8A040;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 20px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  flex: 1;
-  margin: 0 8px;
-  transition: all 0.2s;
-}
 
-.bottom-btn:active {
-  background: #D09030;
-  transform: scale(0.96);
-}
 
-.bottom-btn.secondary {
-  background: #fff;
-  color: #E8A040;
-  border: 2px solid #E8A040;
-}
 
 /* ===== 空状态 ===== */
 .empty-state {
@@ -473,9 +423,6 @@ body {
       <span>📶</span><span>🔋 100%</span>
     </div>
   </div>
-
-  <!-- 导航栏 -->
-  <div class="nav-bar" id="navTitle">🐱 猫咪族谱</div>
 
   <!-- 主页面 -->
   <div class="content" id="mainPage">
@@ -538,18 +485,20 @@ body {
 
   <!-- GitHub Pages 部署信息 -->
   <div class="deploy-info" style="position:fixed;bottom:80px;left:0;width:100%;text-align:center;z-index:400;">
-    <div style="display:inline-block;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);border-radius:12px;padding:12px 16px;max-width:400px;margin:0 auto;border:1px solid rgba(232,160,64,0.3);box-shadow:0 4px 16px rgba(160,100,20,0.1);">
-      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;justify-content:center;">
+    <div style="display:inline-block;background:rgba(255,255,255,0.85);backdrop-filter:blur(8px);border-radius:12px;padding:12px 16px;max-width:400px;margin:0 auto;border:1px solid rgba(232,160,64,0.3);box-shadow:0 4px 16px rgba(160,100,20,0.1);position:relative;">
+      <!-- 关闭按钮 -->
+      <span onclick="hideDeployInfo()" style="position:absolute;top:8px;right:10px;font-size:16px;color:#888;cursor:pointer;width:20px;height:20px;text-align:center;line-height:18px;border-radius:50%;transition:all 0.2s;background:rgba(255,255,255,0.6);">
+        ×
+      </span>
+      
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;justify-content:center;padding-right:15px;">
         <span style="font-size:18px;">🚀</span>
         <strong style="color:#3A1A00;">GitHub Pages 已部署</strong>
       </div>
       <p style="font-size:13px;color:#5A3A10;margin-bottom:8px;">
-        此项目已准备好部署到 GitHub Pages。<br>上传后获得永久链接，手机电脑都能访问。
+        网站已部署完成，获得永久链接。<br>手机电脑都能直接访问。
       </p>
       <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap;">
-        <a href="deploy-to-github.md" style="font-size:13px;color:#E8A040;text-decoration:none;border:1px solid #E8A040;border-radius:8px;padding:4px 10px;">
-          📖 部署教程
-        </a>
         <span onclick="copyCurrentUrl()" style="font-size:13px;color:#6AADFF;text-decoration:none;border:1px solid #6AADFF;border-radius:8px;padding:4px 10px;cursor:pointer;">
           📋 复制网址
         </span>
@@ -557,19 +506,7 @@ body {
     </div>
   </div>
 
-  <!-- 底部操作栏 -->
-  <div class="bottom-bar">
-    <button class="bottom-btn" onclick="toggleViewMode()" id="viewBtn">
-      🌳 族谱视图
-    </button>
-    <button class="bottom-btn secondary" onclick="exportData()">
-      📤 导出数据
-    </button>
-    <button class="bottom-btn secondary" onclick="refreshPage()">
-      🔄 刷新
-    </button>
-  </div>
-</div>
+
 
 <!-- ===== 主 JavaScript ===== -->
 <script>
@@ -695,7 +632,6 @@ function showCatDetail(catId) {
   currentDetailCatId = catId
   
   // 更新详情页内容
-  document.getElementById('navTitle').textContent = `🐱 ${cat.name}`
   const dAvatar = document.getElementById('dAvatar')
   dAvatar.textContent = cat.emoji
   dAvatar.className = `detail-avatar ${cat.gender}`
@@ -741,7 +677,6 @@ function showCatDetail(catId) {
 function showMainPage() {
   document.getElementById('mainPage').style.display = 'block'
   document.getElementById('detailPage').classList.remove('active')
-  document.getElementById('navTitle').textContent = '🐱 猫咪族谱'
 }
 
 function previewPhoto(catId, photoIndex) {
@@ -751,32 +686,6 @@ function previewPhoto(catId, photoIndex) {
 }
 
 // ===== 操作功能 =====
-function toggleViewMode() {
-  if (currentViewMode === 'tree') {
-    // 切换到列表视图
-    document.getElementById('treeRoot').innerHTML = `
-      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;width:100%;">
-        ${cats.map(cat => `
-          <div class="cat-card" onclick="showCatDetail(${cat.id})" style="width:100%;margin:0;">
-            <div class="cat-avatar ${cat.gender}" style="width:48px;height:48px;">
-              ${cat.emoji}
-              <div class="gender-badge ${cat.gender}">${cat.gender === 'female' ? '♀' : '♂'}</div>
-            </div>
-            <span class="cat-name">${cat.name}</span>
-            <span class="cat-birthday">${cat.birthday}</span>
-          </div>
-        `).join('')}
-      </div>
-    `
-    document.getElementById('viewBtn').innerHTML = '🌳 树状视图'
-    currentViewMode = 'list'
-  } else {
-    renderTreeView()
-    document.getElementById('viewBtn').innerHTML = '📋 列表视图'
-    currentViewMode = 'tree'
-  }
-}
-
 function exportData() {
   const dataStr = JSON.stringify(cats, null, 2)
   const blob = new Blob([dataStr], { type: 'application/json' })
@@ -792,34 +701,31 @@ function exportData() {
   alert('数据已导出为 JSON 文件，可用于备份或导入其他系统。')
 }
 
-function refreshPage() {
-  renderTime()
-  alert('页面已刷新，时间更新到当前时刻。')
-}
 
-// ===== 离线功能 =====
-function saveDataToLocal() {
-  localStorage.setItem('cat-family-data', JSON.stringify(cats))
-  alert('数据已保存到浏览器本地存储！即使关闭页面数据也不会丢失。')
-}
-
-function loadDataFromLocal() {
-  const saved = localStorage.getItem('cat-family-data')
-  if (saved) {
-    alert('发现本地保存的数据！')
-  } else {
-    alert('暂无本地数据，当前使用默认数据。')
-  }
-}
 
 // ===== 初始化 =====
 window.onload = function() {
   init()
-  loadDataFromLocal()
   setInterval(renderTime, 60000) // 每分钟更新一次时间
+  
+  // 检查是否需要显示部署信息框
+  if (localStorage.getItem('hide-deploy-info') === 'true') {
+    const infoBox = document.querySelector('.deploy-info')
+    if (infoBox) infoBox.style.display = 'none'
+  }
   
   // 触摸优化
   document.addEventListener('touchstart', function(){}, {passive: true})
+}
+
+// 隐藏部署信息框
+function hideDeployInfo() {
+  const infoBox = document.querySelector('.deploy-info')
+  if (infoBox) {
+    infoBox.style.display = 'none'
+    // 保存到localStorage，下次不再显示
+    localStorage.setItem('hide-deploy-info', 'true')
+  }
 }
 
 // 复制当前网址
@@ -843,9 +749,6 @@ function copyCurrentUrl() {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape' && document.getElementById('detailPage').classList.contains('active')) {
     showMainPage()
-  }
-  if (e.key === 'd' && (e.ctrlKey || e.metaKey)) {
-    exportData()
   }
 })
 </script>
